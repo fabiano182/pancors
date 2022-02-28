@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/michaljanocko/pancors"
+	"github.com/fabiano182/pancors"
 )
 
 func getAllowOrigin() string {

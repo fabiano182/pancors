@@ -1,13 +1,17 @@
-FROM golang:1-alpine
+FROM golang:1.17-alpine3.15 as builder
 
-RUN mkdir /pancors
-WORKDIR /pancors
+WORKDIR go/src/github.com/fabiano182/pancors
 
-COPY go.mod go.mod
-COPY pancors.go pancors.go
-COPY cmd/ cmd/
+COPY . .
 
 RUN go build -o pancors ./cmd/pancors/main.go
+
+
+FROM alpine:3.15
+
+WORKDIR /app/
+
+COPY --from=builder /go/src/githu.com/fabiano182/pancors/pancors ./
 
 EXPOSE 8080
 

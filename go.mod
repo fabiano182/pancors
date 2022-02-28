@@ -1,3 +1,3 @@
-module github.com/michaljanocko/pancors
+module github.com/fabiano182/pancors
 
-go 1.16
+go 1.17
