@@ -43,9 +43,16 @@ func handleProxy(w http.ResponseWriter, r *http.Request, origin string, credenti
 	if referer == "" {
 		referer = r.Header.Get("Referer")
 	}
+	
+	// Get the target endpoint in Headers
+	urlHost := r.Header.Get("target")
+	urlPath := r.URL.Path // pass the path to target endpoint
+	urlParam := urlHost + urlPath
+	if urlHost == "" || urlPath == "" {
+		// Get the URL in params
+		urlParam = r.URL.Query().Get("url")
+	}
 
-	// Get the URL
-	urlParam := r.URL.Query().Get("url")
 	// Validate the URL
 	urlParsed, err := url.Parse(urlParam)
 	if err != nil {
